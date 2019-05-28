@@ -1,5 +1,5 @@
 module "consul_sofia" {
-  source = "../"
+  source = "github.com/chavo1/aws-consul-terraform-multi-region"
 
   consul_version        = "${var.ami_virginia[var.consul_version]}"
   access_key            = "${var.access_key}"
@@ -15,7 +15,7 @@ module "consul_sofia" {
 }
 
 module "consul_varna" {
-  source = "../"
+  source = "github.com/chavo1/aws-consul-terraform-multi-region"
 
   consul_version        = "${var.ami_ohio[var.consul_version]}"
   access_key            = "${var.access_key}"
