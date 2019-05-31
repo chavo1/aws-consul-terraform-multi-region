@@ -73,7 +73,7 @@ resource "aws_instance" "server" {
   vpc_security_group_ids      = ["${var.vpc_security_group_id}"]
 
   // Consul tag consul = "app" we need it for AWS Consul Auto-Join
-  tags {
+  tags = {
     Name       = "consul-server0${count.index + 1}"
     consul     = "app"
     consul_wan = "wan_app"
@@ -83,6 +83,7 @@ resource "aws_instance" "server" {
   connection {
     user        = "ubuntu"
     private_key = "${file("~/.ssh/id_rsa")}"
+    host = self.public_ip // tf12
   }
 
   provisioner "file" {
