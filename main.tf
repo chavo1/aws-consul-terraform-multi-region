@@ -83,7 +83,7 @@ resource "aws_instance" "server" {
   connection {
     user        = "ubuntu"
     private_key = "${file("~/.ssh/id_rsa")}"
-    host = self.public_ip // tf12
+    host        = self.public_ip // tf12
   }
 
   provisioner "file" {

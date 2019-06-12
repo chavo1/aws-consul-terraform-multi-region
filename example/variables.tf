@@ -2,7 +2,7 @@ variable "access_key" {}
 variable "secret_key" {}
 
 variable "server_count" {
-  default = 3
+  default = 1
 }
 
 variable "subnet" {
