@@ -5,9 +5,7 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "server_count" {
-  default = 1
-}
+variable "server_count" {}
 
 variable "vpc_security_group_id" {}
 
