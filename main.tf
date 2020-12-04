@@ -1,14 +1,3 @@
-terraform {
-  required_version = "~> 0.13.0"
-}
-
-// We need an AWS credentials
-provider "aws" {
-  access_key = var.access_key
-  secret_key = var.secret_key
-  region     = var.region
-}
-
 // Generates an IAM policy document in JSON format
 data "aws_iam_policy_document" "assume_role" {
   statement {
