@@ -68,24 +68,8 @@ resource "aws_instance" "server" {
     consul_wan = "wan_app"
   }
 
-  // Our private key needed for connection to the servers 
-  connection {
-    user        = "ubuntu"
-    private_key = file("~/.ssh/id_rsa")
-    host        = self.public_ip // tf12
-  }
-
-  provisioner "file" {
-    source      = "${path.module}/scripts/consul.sh"
-    destination = "/tmp/consul.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo ${var.dcname}",
-      "sudo bash /tmp/consul.sh ${var.dcname}",
-    ]
-  }
+  // Our private key needed for connection to the servers
+user_data = templatefile("${path.module}/templates/consul-config.tpl", { dcname = var.dcname} )
 }
 
 // The output of the consul agents
@@ -123,4 +107,8 @@ output "ami_id" {
 
 output "private_ip" {
   value = aws_instance.server.*.private_ip
+}
+
+output "public_ip" {
+  value = aws_instance.server.*.public_ip
 }
